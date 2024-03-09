@@ -34,7 +34,7 @@ def xs_and_os(p):
     return (math.ceil(p/2), math.floor(p/2))
 
 def positions(s):
-    #Total number of tictactoe positions, given S slots
+    # Total number of tictactoe positions, given S slots
     all_pos = [xs_and_os(p) for p in range(s + 1)]
     rearrangements = [rearrange(cross, naught, s) for cross, naught in all_pos]
     return sum(rearrangements)
