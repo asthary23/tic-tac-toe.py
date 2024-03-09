@@ -7,7 +7,7 @@ outcomes = {}
 # To see the total number of possible wins, loses, or ties, enable this code in the tictactoe.py file!
 
 for board in valid_boards():
-    value = Board(board).terminal         # value = Remoteness(board).depth() to produce all remoteness values
+    value = Board(board).terminal         # Set value = Remoteness(board).depth() to produce all remoteness values
     if value == 1:
         endgames["win"] += 1
     elif not value:
