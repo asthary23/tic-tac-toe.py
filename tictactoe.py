@@ -1,6 +1,5 @@
 import copy
 import random
-import time
 
 default_board = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
 
