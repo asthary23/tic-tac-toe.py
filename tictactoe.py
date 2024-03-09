@@ -3,7 +3,6 @@ import random
 import time
 
 default_board = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
-memory = {} 
 
 def win_condition(board, player):
     wins_list = [
