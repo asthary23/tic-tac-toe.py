@@ -65,7 +65,7 @@ Separate implementation of unhashing function (can be made compatible with curre
             return ""
         elif s == o:
             return oC * s ## all os
-        elif i < rearranger_o_only(s-1, o): ## no o cause #pos with o first not > i
+        elif i < rearranger_o_only(s-1, o): # for defined rearranger_o_only(s, o), no o cause pos with o first not > i
             return bC + rearranger_unhash_o_only(s-1, o, i, bC, oC)
         else:
             return oC + rearranger_unhash_o_only(s-1, o-1, i-rearranger_o_only(s-1, o), bC, oC)
