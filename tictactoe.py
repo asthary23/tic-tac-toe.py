@@ -87,7 +87,7 @@ class Board:
         return type(self.primitive()) != str
     
     def solve(self):
-        if type(self.primitive()) != str:
+        if self.is_over():
             return self.primitive()
         else:
             children = [self.domove(move) for move in self.generate()]
