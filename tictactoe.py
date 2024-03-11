@@ -78,6 +78,11 @@ class Board:
         new_board[cell] = "x" if self.turn else "o"
         return Board(new_board)
 
+    def branches(self):
+        branches = [self.domove(move) for move in self.generate()]
+        leaves = [child.terminal for child in branches]
+        return branches, leaves
+
     def primitive(self):
         return 1 if self.win_condition("x") else (-1 if self.win_condition("o") else (0 if "-" not in self.board else ""))
 
@@ -88,8 +93,7 @@ class Board:
         if self.is_over():
             return self.primitive()
         else:
-            children = [self.domove(move) for move in self.generate()]
-            spread = [child.terminal for child in children]
+            children, spread = self.branches()
             if self.turn:
                 return 1 if 1 in spread else (0 if 0 in spread else -1)
             else:
@@ -98,10 +102,10 @@ class Board:
 class Remoteness(Board):
     # Calculate remoteness from terminal state
 
-    def branches(self):
-        branches = [self.domove(move) for move in self.generate()]
-        leaves = [child.terminal for child in branches]
-        return branches, leaves
+    def __init__(self, board, thus_far=0):
+        super().__init__(board)
+        self.thus_far = thus_far
+        self.depth = self.search()
 
     def best_move(self):
         if self.is_over():
@@ -109,23 +113,22 @@ class Remoteness(Board):
         children, spread = self.branches()
         evaluate = [self.terminal + k for k in spread]
         best_value = max(evaluate) if self.turn else min(evaluate)
-        if evaluate.count(best_value) > 1:
-            if self.block():
-                return children[self.block()].board
+        if evaluate.count(best_value) > 1 and self.block():
+            return children[self.block()].board
         return children[evaluate.index(best_value)].board
     
-    def depth(self):
+    def search(self):
         if self.is_over():
             return 0
         elif not self.terminal:
             return len([e for e in self.board if e == "-"])
-        children, spread = self.branches()
-        evaluate = [self.terminal + k for k in spread]
-        best_value = max(evaluate) if self.turn else min(evaluate)
-        if evaluate.count(best_value) > 1:
-            if self.block():
-                return 1 + Remoteness(children[self.block()].board).depth()
-        return 1 + Remoteness(children[evaluate.index(best_value)].board).depth()
+        else:
+            children, spread = self.branches()
+            evaluate = [self.terminal + k for k in spread]
+            best_value = max(evaluate) if self.turn else min(evaluate)
+            if evaluate.count(best_value) > 1 and self.block():
+                return 1 + Remoteness(children[self.block()].board).search()
+            return 1 + Remoteness(children[evaluate.index(best_value)].board).search()
 
     def block(self):
         opponent_marker = "x" if not self.turn else "o"
@@ -139,7 +142,9 @@ class Remoteness(Board):
 class Play(Remoteness):
     # Simulate gameplay
 
-    difficulty = 0
+    def __init__(self, board):
+        super().__init__(board)
+        self.difficulty = 0
 
     def __str__(self):
         rows = []
@@ -181,7 +186,7 @@ class Play(Remoteness):
         options = [choice+1 for choice in self.generate()]
         print("Options: ", options)
 
-        print(f"Player (x) Wins in: {self.depth()} moves" if self.terminal == 1 else (f"Tie in: {self.depth()} moves" if not self.terminal else f"Player (o) Wins in: {self.depth()} moves"))
+        print(f"Player (x) Wins in: {self.depth} moves" if self.terminal == 1 else (f"Tie in: {self.depth} moves" if not self.terminal else f"Player (o) Wins in: {self.depth} moves"))
 
         ui = input("You will be Player (x). Please enter a cell number: ")
         while not(ui.isnumeric() and int(ui) in options):
@@ -193,14 +198,9 @@ class Play(Remoteness):
         return Play(new_board)
 
     def random_strat(self):
-        children = [self.domove(move) for move in self.generate()]
+        children, _ = self.branches()
         return random.choice(children).board
 
 #To play, run this code snippet in your terminal in the file directory!
-    game = Play(default_board)
-    game.gameplay()
-
-
-
-
-
+game = Play(default_board)
+game.gameplay()
