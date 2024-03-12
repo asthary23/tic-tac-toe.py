@@ -1,4 +1,5 @@
 #HASH FUNCTION:
+"""@memoize"""
 def memoize(f): 
     # Decorator function can be implemented as pleased
     # This inner function has access to memory and 'f'
