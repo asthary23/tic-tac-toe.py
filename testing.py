@@ -5,6 +5,16 @@ endgames = {"win": 0, "tie": 0, "lose": 0}
 outcomes = defaultdict(int)
 symmetries = []
 
+def cousins(board):
+    c5 = [board[i] for i in [2,1,0,5,4,3,8,7,6]] 
+    c4 = [board[i] for i in [6,7,8,3,4,5,0,1,2]] 
+    c6 = [board[i] for i in [8,5,2,7,4,1,6,3,0]] 
+    c7 = [board[i] for i in [0,3,6,1,4,7,2,5,8]] 
+    c2 = [board[i] for i in [8,7,6,5,4,3,2,1,0]] 
+    c1 = [board[i] for i in [6,3,0,7,4,1,8,5,2]] 
+    c3 = [board[i] for i in [2,5,8,1,4,7,0,3,6]] 
+    return [board, c1, c2, c3, c4, c5, c6, c7]
+
 # To see the total number of possible wins, loses, or ties, enable this code in the tictactoe.py file!
 
 for board in valid_boards():
