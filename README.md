@@ -1,6 +1,7 @@
 Assumptions: 
 1. User/first player is always Player (x)
 2. A board state in which a win condition for Player (x) or (o) is met is a primitive "win" for the respective player
+3. Minimax algorithm asserts Player (x) as the "maximizer" and Player (o) as the "minimizer"
 
 
 Interactive User Play (Perfect Play Bot shown):
