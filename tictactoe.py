@@ -156,9 +156,7 @@ class Remoteness(Board):
 class Play(Remoteness):
     # Simulate gameplay
 
-    def __init__(self, board):
-        super().__init__(board)
-        self.difficulty = 0
+    difficulty = 0
 
     def __str__(self):
         rows = []
@@ -177,7 +175,7 @@ class Play(Remoteness):
         while not(difficulty.isnumeric() and int(difficulty) in [1,2]):
             print("Invalid move/command. See options above.")
             difficulty = input("Please enter a different cell number: ")
-        self.difficulty = int(difficulty)
+        Play.difficulty = int(difficulty)
         return self.play() 
     
     def play(self):
@@ -185,7 +183,7 @@ class Play(Remoteness):
             print(str(self))
             print("Player (x) Wins!" if self.primitive() == 1 else ("Tie!" if not self.primitive() else "Player (o) Wins!"))
         else:
-            if self.difficulty == 1:
+            if Play.difficulty == 1:
                 return self.user_play().play() if self.turn else Play(self.random_strat()).play() 
             else:
                 return self.user_play().play() if self.turn else Play(self.best_move()).play()
