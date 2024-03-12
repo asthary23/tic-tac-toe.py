@@ -38,7 +38,7 @@ def enable_symmetries():
 
 def without_symmetries():
     for board in valid_boards:
-    outcomes[f"{Board(board).terminal}, {Remoteness(board).depth()}"] += 1
+        outcomes[f"{Board(board).terminal}, {Remoteness(board).depth()}"] += 1
 
 
 # All combinations of remoteness and terminal state values (printing could vary):
