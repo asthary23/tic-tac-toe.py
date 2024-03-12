@@ -2,7 +2,8 @@ from tictactoe import *
 from collections import defaultdict
 
 endgames = {"win": 0, "tie": 0, "lose": 0}
-outcomes = {}
+outcomes = defaultdict(int)
+symmetries = []
 
 # To see the total number of possible wins, loses, or ties, enable this code in the tictactoe.py file!
 
@@ -15,15 +16,27 @@ for board in valid_boards():
     else:
         endgames["lose"] += 1
 
+def enable_symmetries():
+    for board in valid_boards:
+        # Check if any symmetry exists
+        if any([sym in symmetries for sym in cousins(board)]):
+            continue  # If symmetry exists, move to next board
+        else:
+            # If no symmetry exists, hash the board and store outcome
+            symmetries.append(board)
+            outcomes[f"{Board(board).terminal}, {Remoteness(board).depth}"] += 1
+
+def without_symmetries():
+    for board in valid_boards:
+    outcomes[f"{Board(board).terminal}, {Remoteness(board).depth()}"] += 1
+
 
 # All combinations of remoteness and terminal state values (printing could vary):
 def output(valid_boards):
-  outcomes = defaultdict(int)
-  for board in valid_boards:
-    outcomes[f"{Board(board).terminal}, {Remoteness(board).depth()}"] += 1
+  #insert without_symmetries() to disregard symmetries else call enable_symmetries()
 
   print("Depth", "Win  ", "Lose  ", "Tie ", "Total")
-  print("-" * 36)  # Print 36 hyphens for consistent line length
+  print("-" * 32)  # Print 32 hyphens for consistent line length
 
   for rem in range(10):
     win_str = f"{outcomes[f'1, {rem}']}"  # String representation of win count
@@ -36,4 +49,4 @@ def output(valid_boards):
     tie_spaces = max(0, 4 - len(tie_str))
     total_spaces = max(0, 5 - len(total_str))  # Minimum 5 spaces for total
     print(f"{rem:3}", win_spaces*" ", win_str, lose_spaces*" ", lose_str, tie_spaces*" ", tie_str, total_spaces*" ", total_str)
-    print("-" * 36)  # Print 36 hyphens for consistent line length
+    print("-" * 32)  # Print 32 hyphens for consistent line length
