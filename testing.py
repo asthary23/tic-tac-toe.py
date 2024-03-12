@@ -5,6 +5,8 @@ endgames = {"win": 0, "tie": 0, "lose": 0}
 outcomes = defaultdict(int)
 symmetries = []
 
+# Reflections, rotations, and other symmetries per board
+
 def cousins(board):
     c5 = [board[i] for i in [2,1,0,5,4,3,8,7,6]] 
     c4 = [board[i] for i in [6,7,8,3,4,5,0,1,2]] 
