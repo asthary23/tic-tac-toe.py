@@ -108,9 +108,16 @@ class Remoteness(Board):
         self.depth = self.search()
 
     def best_move(self):
+        children, spread = self.branches()
+        next_move = [child for child in children if child.is_over()]
         if self.is_over():
             return self.board
-        children, spread = self.branches()
+        elif len(next_move) and self.turn:
+            primitives = [child.primitive() for child in next_move]
+            if self.turn and 1 in primitives:
+                return next_move[primitives.index(1)].board
+            elif not self.turn and -1 in primitives:
+                return next_move[primitives.index(-1)].board
         evaluate = [self.terminal + k for k in spread]
         best_value = max(evaluate) if self.turn else min(evaluate)
         if evaluate.count(best_value) > 1 and self.block():
@@ -118,12 +125,19 @@ class Remoteness(Board):
         return children[evaluate.index(best_value)].board
     
     def search(self):
+        children, spread = self.branches()
+        next_move = [child for child in children if child.is_over()]
         if self.is_over():
             return 0
         elif not self.terminal:
             return len([e for e in self.board if e == "-"])
+        elif len(next_move) and self.turn:
+            primitives = [child.primitive() for child in next_move]
+            if self.turn and 1 in primitives:
+                return 1
+            elif not self.turn and -1 in primitives:
+                return 1
         else:
-            children, spread = self.branches()
             evaluate = [self.terminal + k for k in spread]
             best_value = max(evaluate) if self.turn else min(evaluate)
             if evaluate.count(best_value) > 1 and self.block():
