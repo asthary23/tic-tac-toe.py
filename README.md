@@ -1,5 +1,6 @@
-**Assumptions: 
-**
+Assumptions: 
+1. User/first player is always Player (x)
+2. A board state in which a win condition for Player (x) or (o) is met is a primitive "win" for the respective player
 
 
 Interactive User Play (Perfect Play Bot shown):
