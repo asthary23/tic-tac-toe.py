@@ -4,10 +4,17 @@ Interactive User Play:
 <img width="530" alt="Screenshot 2024-03-11 at 6 35 12 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/97cca371-e1fe-4b8b-ba75-2d4ca68b5469">
 <img width="533" alt="Screenshot 2024-03-11 at 6 35 48 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/dc982ed2-640b-40ed-9702-1dbeb8b6edf9">
 
+--------------
 
 Associated Remoteness/Depth and Terminal States for this implementation: 
 
-<img width="532" alt="Screenshot 2024-03-11 at 6 31 53 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/d32815c5-7fda-4d61-a714-507fc039ae68">
+<img width="245" alt="Screenshot 2024-03-12 at 4 24 24 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/6b7402a7-f229-47ee-9a2a-f6873e3fcaa4">
+
+Associated Remoteness/Depth and Terminal States (with symmetries) for this implementation: 
+
+<img width="254" alt="Screenshot 2024-03-12 at 4 21 41 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/e68e6a46-ea40-4567-9c73-a2113907758d">
+
+--------------
 
 Hash Function: 
 
