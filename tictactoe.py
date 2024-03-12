@@ -177,19 +177,15 @@ class Play(Remoteness):
         while not(difficulty.isnumeric() and int(difficulty) in [1,2]):
             print("Invalid move/command. See options above.")
             difficulty = input("Please enter a different cell number: ")
-        if int(difficulty) == 1:
-            Play.difficulty = int(difficulty)
-            return self.play()
-        elif int(difficulty) == 2:
-            Play.difficulty = int(difficulty)
-            return self.play()       
+        self.difficulty = int(difficulty)
+        return self.play() 
     
     def play(self):
-        if type(self.primitive()) != str:
+        if self.is_over():
             print(str(self))
-            print("Player (x) Wins!" if self.primitive() == 1 else ("Tie!" if self.primitive() == 0 else "Player (o) Wins!"))
+            print("Player (x) Wins!" if self.primitive() == 1 else ("Tie!" if not self.primitive() else "Player (o) Wins!"))
         else:
-            if Play.difficulty == 1:
+            if self.difficulty == 1:
                 return self.user_play().play() if self.turn else Play(self.random_strat()).play() 
             else:
                 return self.user_play().play() if self.turn else Play(self.best_move()).play()
