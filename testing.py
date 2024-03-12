@@ -22,7 +22,7 @@ def output(valid_boards):
   for board in valid_boards:
     outcomes[f"{Board(board).terminal}, {Remoteness(board).depth()}"] += 1
 
-  print("Depth", "Win  ", "Lose  ", "Tie  ", "Total")
+  print("Depth", "Win  ", "Lose  ", "Tie ", "Total")
   print("-" * 36)  # Print 36 hyphens for consistent line length
 
   for rem in range(10):
