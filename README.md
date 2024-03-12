@@ -1,3 +1,7 @@
+**Assumptions: 
+**
+
+
 Interactive User Play (Perfect Play Bot shown):
 
 <img width="534" alt="Screenshot 2024-03-11 at 6 34 33 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/b6f2171b-5087-4bfd-ae1b-ade75903e686">
