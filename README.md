@@ -1,14 +1,17 @@
 Assumptions for this implementation: 
+
 1. User/first player is always Player (x)
 2. A board state in which a win condition for Player (x) or (o) is met is a primitive "win" for the respective player
 3. All terminal state/remoteness values are permuted under perfect gameplay from both players
 4. Minimax algorithm asserts Player (x) as the "maximizer" and Player (o) as the "minimizer"
 
+Prompt: 
+
+<img width="534" alt="Screenshot 2024-03-11 at 6 34 33 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/b6f2171b-5087-4bfd-ae1b-ade75903e686"> 
+
 Interactive User Play (Perfect Play Bot shown):
 
-<img width="534" alt="Screenshot 2024-03-11 at 6 34 33 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/b6f2171b-5087-4bfd-ae1b-ade75903e686">
-<img width="530" alt="Screenshot 2024-03-11 at 6 35 12 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/97cca371-e1fe-4b8b-ba75-2d4ca68b5469">
-<img width="533" alt="Screenshot 2024-03-11 at 6 35 48 PM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/dc982ed2-640b-40ed-9702-1dbeb8b6edf9">
+<img width="393" alt="Screenshot 2024-03-13 at 11 32 23 AM" src="https://github.com/asthary23/tic-tac-toe.py/assets/154309720/618f2f9f-f814-4757-a603-6fcc8ef6040b">
 
 --------------
 
