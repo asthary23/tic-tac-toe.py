@@ -106,27 +106,11 @@ class Remoteness(Board):
         super().__init__(board)
         self.thus_far = thus_far
         self.depth = self.search()
-
-    def best_move(self):
-        children, spread = self.branches()
-        next_move = [child for child in children if child.is_over()]
-        if self.is_over():
-            return self.board
-        elif len(next_move) and self.turn:
-            primitives = [child.primitive() for child in next_move]
-            if self.turn and 1 in primitives:
-                return next_move[primitives.index(1)].board
-            elif not self.turn and -1 in primitives:
-                return next_move[primitives.index(-1)].board
-        evaluate = [self.terminal + k for k in spread]
-        best_value = max(evaluate) if self.turn else min(evaluate)
-        if evaluate.count(best_value) > 1 and self.block():
-            return children[self.block()].board
-        return children[evaluate.index(best_value)].board
     
     def search(self):
         children, spread = self.branches()
         next_move = [child for child in children if child.is_over()]
+        
         if self.is_over():
             return 0
         elif not self.terminal:
@@ -204,6 +188,25 @@ class Play(Remoteness):
         new_board = list(self.board)
         new_board[int(ui)-1] = "x"
         return Play(new_board)
+
+    def best_move(self):
+        children, spread = self.branches()
+        next_move = [child for child in children if child.is_over()]
+        
+        if self.is_over():
+            return self.board
+        elif len(next_move) and self.turn:
+            primitives = [child.primitive() for child in next_move]
+            if self.turn and 1 in primitives:
+                return next_move[primitives.index(1)].board
+            elif not self.turn and -1 in primitives:
+                return next_move[primitives.index(-1)].board
+        else:
+            evaluate = [self.terminal + k for k in spread]
+            best_value = max(evaluate) if self.turn else min(evaluate)
+            if evaluate.count(best_value) > 1 and self.block():
+                return children[self.block()].board
+            return children[evaluate.index(best_value)].board
 
     def random_strat(self):
         children, _ = self.branches()
