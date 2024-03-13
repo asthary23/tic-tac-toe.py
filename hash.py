@@ -1,14 +1,3 @@
-#HASH FUNCTION:
-"""@memoize"""
-def memoize(f): 
-    # Decorator function can be implemented as pleased
-    # This inner function has access to memory and 'f'
-    def inner(num): 
-        if num not in memory:          
-            memory[num] = f(num) 
-        return memory[num] 
-    return inner
-
 def fact(n):
     # n * (n-1) ... 1
     return 1 if n <= 1 else n * fact(n-1)
@@ -94,3 +83,15 @@ Separate implementation of unhashing function (can be made compatible with curre
         else: ## index is bigger than -s and os
             return xC + rearranger_unhash(s-1,o,x-1,i-rearranger(s-1,o,x)-rearranger(s-1,o-1,x),bC,oC,xC)
 """
+
+#HASH FUNCTION:
+"""@memoize"""
+#HASH FUNCTION:
+def memoize(f): 
+    memory = {}
+    # This inner function has access to memory and 'f'
+    def inner(obj): 
+        if hashing("".join(obj.board), obj.x, obj.o, 9) not in memory:          
+            memory[hashing("".join(obj.board), obj.x, obj.o, 9)] = f(obj) 
+        return memory[hashing("".join(obj.board), obj.x, obj.o, 9)] 
+    return inner
