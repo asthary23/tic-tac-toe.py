@@ -85,7 +85,7 @@ Separate implementation of unhashing function (can be made compatible with curre
 """
 
 #HASH FUNCTION:
-"""@memoize"""
+"""@memoize can be used"""
 #HASH FUNCTION:
 def memoize(f): 
     memory = {}
@@ -95,3 +95,5 @@ def memoize(f):
             memory[hashing("".join(obj.board), obj.x, obj.o, 9)] = f(obj) 
         return memory[hashing("".join(obj.board), obj.x, obj.o, 9)] 
     return inner
+
+# Example: memo_func = memoize(Board.solve)
