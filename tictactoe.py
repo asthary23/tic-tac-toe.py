@@ -93,7 +93,7 @@ class Board:
         if self.is_over():
             return self.primitive()
         else:
-            children, spread = self.branches()
+            _, spread = self.branches()
             if self.turn:
                 return 1 if 1 in spread else (0 if 0 in spread else -1)
             else:
