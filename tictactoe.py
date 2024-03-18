@@ -104,7 +104,6 @@ class Remoteness(Board):
 
     def __init__(self, board, thus_far=0):
         super().__init__(board)
-        self.thus_far = thus_far
         self.depth = self.search()
     
     def search(self):
